@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "epistemic-harness"
+version = "0.1.0"
+description = "Small evidence-bounded certainty-control test harness"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["epistemic_harness*"]
+
+[tool.setuptools.package-data]
+epistemic_harness = []

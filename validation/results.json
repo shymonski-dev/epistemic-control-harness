@@ -1,0 +1,302 @@
+{
+  "development": {
+    "baseline": {
+      "eligible_supported_complete": 4,
+      "useful_emitted": 3,
+      "supported_complete_withheld": [
+        "p02a"
+      ],
+      "unsupported_emitted": [
+        "p01b"
+      ],
+      "incomplete_emitted": [
+        "p01b"
+      ],
+      "unjustified_supported_verdicts": [
+        "p01b"
+      ],
+      "incorrect_contradictions": [
+        "p04b"
+      ],
+      "verdict_label_matches": 6,
+      "audit_pass_count": 8,
+      "metrics": {
+        "cases": 8,
+        "successful_cases": 8,
+        "error_count": 0,
+        "task_completion_reviewed": 8,
+        "task_completion_complete_rate": 0.5,
+        "task_completion_incomplete_count": 4,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 1,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 4,
+        "understatement_rate": 0.2,
+        "understatement_denominator": 5,
+        "answer_understatement_rate_vs_benchmark": 1.0,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.5,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 2.337500875,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    },
+    "alignment": {
+      "eligible_supported_complete": 4,
+      "useful_emitted": 2,
+      "supported_complete_withheld": [
+        "p02a",
+        "p04a"
+      ],
+      "unsupported_emitted": [],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [],
+      "incorrect_contradictions": [
+        "p04b"
+      ],
+      "verdict_label_matches": 6,
+      "audit_pass_count": 7,
+      "metrics": {
+        "cases": 8,
+        "successful_cases": 7,
+        "error_count": 1,
+        "task_completion_reviewed": 7,
+        "task_completion_complete_rate": 0.2857142857142857,
+        "task_completion_incomplete_count": 5,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 1,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 2,
+        "understatement_rate": 0.3333333333333333,
+        "understatement_denominator": 3,
+        "answer_understatement_rate_vs_benchmark": 1.0,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.75,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 3.750129625,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    }
+  },
+  "holdout": {
+    "baseline": {
+      "eligible_supported_complete": 8,
+      "useful_emitted": 8,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [],
+      "incorrect_contradictions": [
+        "p06b",
+        "p07b",
+        "p10b",
+        "p11b"
+      ],
+      "verdict_label_matches": 12,
+      "audit_pass_count": 16,
+      "metrics": {
+        "cases": 16,
+        "successful_cases": 16,
+        "error_count": 0,
+        "task_completion_reviewed": 16,
+        "task_completion_complete_rate": 0.5,
+        "task_completion_incomplete_count": 8,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 8,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 8,
+        "answer_understatement_rate_vs_benchmark": 1.0,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.5,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 2.21836725,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    },
+    "alignment": {
+      "eligible_supported_complete": 8,
+      "useful_emitted": 8,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [],
+      "incorrect_contradictions": [
+        "p06b",
+        "p07b",
+        "p08b",
+        "p10b"
+      ],
+      "verdict_label_matches": 12,
+      "audit_pass_count": 16,
+      "metrics": {
+        "cases": 16,
+        "successful_cases": 16,
+        "error_count": 0,
+        "task_completion_reviewed": 16,
+        "task_completion_complete_rate": 0.5,
+        "task_completion_incomplete_count": 8,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 8,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 8,
+        "answer_understatement_rate_vs_benchmark": 1.0,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.5,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 3.9480961875,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    }
+  },
+  "arithmetic": {
+    "baseline": {
+      "eligible_supported_complete": 4,
+      "useful_emitted": 4,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [],
+      "incorrect_contradictions": [],
+      "verdict_label_matches": 4,
+      "audit_pass_count": 4,
+      "metrics": {
+        "cases": 4,
+        "successful_cases": 4,
+        "error_count": 0,
+        "task_completion_reviewed": 4,
+        "task_completion_complete_rate": 1.0,
+        "task_completion_incomplete_count": 0,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 4,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 4,
+        "answer_understatement_rate_vs_benchmark": 0.5,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.0,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 1.57371025,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    },
+    "alignment": {
+      "eligible_supported_complete": 4,
+      "useful_emitted": 4,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [],
+      "incorrect_contradictions": [],
+      "verdict_label_matches": 4,
+      "audit_pass_count": 4,
+      "metrics": {
+        "cases": 4,
+        "successful_cases": 4,
+        "error_count": 0,
+        "task_completion_reviewed": 4,
+        "task_completion_complete_rate": 1.0,
+        "task_completion_incomplete_count": 0,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 4,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 4,
+        "answer_understatement_rate_vs_benchmark": 0.5,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.0,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 1.4924620000000002,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    }
+  },
+  "fresh": {
+    "baseline": {
+      "eligible_supported_complete": 5,
+      "useful_emitted": 5,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [
+        "p06a"
+      ],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [
+        "p06a"
+      ],
+      "incorrect_contradictions": [],
+      "verdict_label_matches": 5,
+      "audit_pass_count": 6,
+      "metrics": {
+        "cases": 6,
+        "successful_cases": 6,
+        "error_count": 0,
+        "task_completion_reviewed": 6,
+        "task_completion_complete_rate": 1.0,
+        "task_completion_incomplete_count": 0,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 6,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 6,
+        "answer_understatement_rate_vs_benchmark": 0.8333333333333334,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.0,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 2.738881666666667,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    },
+    "alignment": {
+      "eligible_supported_complete": 5,
+      "useful_emitted": 5,
+      "supported_complete_withheld": [],
+      "unsupported_emitted": [
+        "p06a"
+      ],
+      "incomplete_emitted": [],
+      "unjustified_supported_verdicts": [
+        "p06a"
+      ],
+      "incorrect_contradictions": [],
+      "verdict_label_matches": 5,
+      "audit_pass_count": 6,
+      "metrics": {
+        "cases": 6,
+        "successful_cases": 6,
+        "error_count": 0,
+        "task_completion_reviewed": 6,
+        "task_completion_complete_rate": 1.0,
+        "task_completion_incomplete_count": 0,
+        "task_completion_unknown_count": 0,
+        "completion_withheld_count": 0,
+        "overstatement_rate": 0.0,
+        "overstatement_denominator": 6,
+        "understatement_rate": 0.0,
+        "understatement_denominator": 6,
+        "answer_understatement_rate_vs_benchmark": 0.8333333333333334,
+        "baseline_overstatement_rate_heuristic": 0.0,
+        "abstention_rate": 0.0,
+        "factual_correctness": null,
+        "factual_correctness_reviewed": 0,
+        "mean_latency_seconds": 7.1269393333333335,
+        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
+      }
+    }
+  },
+  "heldout_adoption_conditions_met": true,
+  "promotion_decision": "Experimental: heldout emission conditions alone are insufficient; development has a mapping failure and retention loss, with residual incorrect contradiction and an ambiguous fresh inference.",
+  "provenance": "Two boundary labels confirmed by user; other fixture labels assistant-authored before inference. Fresh review after inference is separate. Same-model double review is correlated; small heldout set is not an independent research benchmark."
+}

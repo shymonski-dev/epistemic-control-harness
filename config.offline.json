@@ -1,0 +1,62 @@
+{
+  "roles": {
+    "generator": {
+      "provider": "local",
+      "model": "qwen3-1.7b-mlx",
+      "model_env": "GENERATOR_MODEL",
+      "prompt_suffix": "/no_think"
+    },
+    "verifier": {
+      "provider": "openrouter",
+      "model": "openai/gpt-4.1",
+      "prompt_suffix": "",
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "verification",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "contradicted",
+                  "unknown"
+                ]
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "status",
+              "score",
+              "reason"
+            ]
+          }
+        }
+      }
+    },
+    "rewriter": {
+      "provider": "local",
+      "model": "qwen3-1.7b-mlx",
+      "model_env": "REWRITER_MODEL",
+      "prompt_suffix": "/no_think"
+    }
+  },
+  "verification_mode": "stage2",
+  "timeout_seconds": 60,
+  "max_tokens": 2048,
+  "verification_protocol": "evidence_alignment",
+  "rewrite_mode": "deterministic",
+  "task_completion": "off",
+  "completion_protocol": "requirements"
+}

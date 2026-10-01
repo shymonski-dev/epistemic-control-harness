@@ -1,0 +1,8 @@
+{
+  "purpose": "Arithmetic/fresh task metadata frozen after user contract clarification and before their inference; runtime/evidence freeze remains original.",
+  "sha256": {
+    "benchmarks/arithmetic-coverage.jsonl": "ed7890bc0af210e861f2a81ef39d74ef0ef2a878d7ce0e6197460000e8a14489",
+    "benchmarks/fresh-tasks.jsonl": "4ca001a419b088c94c716700a4ec3b15f9f825afa7ce111aed93acf99df64207",
+    "validation/task-decision.json": "9c30deb4bbeb2502f18ed946cd24d282a52350f7708bd3fb28d30778f84352bd"
+  }
+}

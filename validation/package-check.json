@@ -1,0 +1,19 @@
+{
+  "tests": {
+    "passed": true,
+    "returncode": 0
+  },
+  "offline_cli": {
+    "passed": true,
+    "returncode": 0
+  },
+  "results_reproduction": {
+    "passed": true,
+    "returncode": 0
+  },
+  "credential_exclusion": true,
+  "prior_frozen_files_unchanged": true,
+  "recorded_results_reproduced": true,
+  "tests_count": 87,
+  "offline_cases": 20
+}
