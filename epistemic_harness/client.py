@@ -3,7 +3,17 @@ import json
 import os
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
+
+
+class NoRedirect(HTTPRedirectHandler):
+    """Reject redirects before credentials can leave the configured endpoint."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise HTTPError(req.full_url, code, "Endpoint redirect rejected", headers, fp)
+
+
+def urlopen(request, *, timeout):
+    return build_opener(NoRedirect()).open(request, timeout=timeout)
 
 
 class EndpointError(RuntimeError):
@@ -21,6 +31,7 @@ class Client:
                                 "prompt_suffix": cfg.get("prompt_suffix", ""),
                                 "response_format": cfg.get("response_format")}
                           for role, cfg in self.config["roles"].items()},
+                "decision_reviewer": {k: self.config["decision_reviewer"].get(k) for k in ("provider", "model", "protocol")} if isinstance(self.config.get("decision_reviewer"), dict) else None,
                 "verification_mode": self.config["verification_mode"],
                 "rewrite_mode": self.config.get("rewrite_mode", "model"),
                 "claim_bridge": self.config.get("claim_bridge", False),
@@ -29,6 +40,10 @@ class Client:
                 "verification_protocol": self.config.get("verification_protocol", "direct"),
                 "timeout_seconds": self.config.get("timeout_seconds", 60),
                 "max_tokens": self.config.get("max_tokens", 1024)}
+
+    def decide(self, state: dict, questions: dict) -> dict:
+        from .jev_client import JevClient
+        return JevClient(self.config).decide(state, questions)
 
     def complete(self, role: str, system: str, payload: dict, *, response_format: dict | None = None) -> str:
         role_cfg = self.config["roles"][role]

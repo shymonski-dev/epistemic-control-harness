@@ -1,0 +1,12 @@
+{
+  "requests": 24,
+  "input_tokens": 13100,
+  "reported_cost_usd": 0.0005501999999999999,
+  "unknown_usage": false,
+  "limits": {
+    "requests": 24,
+    "input_tokens": 40000,
+    "reported_cost_usd": 0.02
+  },
+  "note": "Limits stop subsequent calls once reached; the current in-flight request may cross token/cost limits. No retries or new chat calls."
+}

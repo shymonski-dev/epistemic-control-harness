@@ -61,8 +61,11 @@ def main() -> int:
             raise ValueError("completion_protocol must be global or requirements")
         if config.get("rewrite_mode", "model") not in ("model", "deterministic"):
             raise ValueError("rewrite_mode must be model or deterministic")
-        if config.get("verification_protocol", "direct") not in ("direct", "evidence_check", "entailment", "evidence_map", "evidence_alignment"):
-            raise ValueError("verification_protocol must be direct, evidence_check, entailment, evidence_map or evidence_alignment")
+        if config.get("verification_protocol", "direct") not in ("direct", "evidence_check", "entailment", "evidence_map", "evidence_alignment", "evidence_jev"):
+            raise ValueError("verification_protocol must be direct, evidence_check, entailment, evidence_map, evidence_alignment or evidence_jev")
+        if config.get("verification_protocol") == "evidence_jev":
+            from .jev_client import validate_settings
+            validate_settings(config.get("decision_reviewer"))
         roles = config.get("roles")
         if not isinstance(roles, dict) or set(roles) != {"generator", "verifier", "rewriter"}:
             raise ValueError("Config requires generator, verifier and rewriter roles")

@@ -55,8 +55,13 @@
   "verification_mode": "stage2",
   "timeout_seconds": 60,
   "max_tokens": 2048,
-  "verification_protocol": "evidence_map",
+  "verification_protocol": "evidence_jev",
   "rewrite_mode": "deterministic",
   "task_completion": "require",
-  "completion_protocol": "requirements"
+  "completion_protocol": "requirements",
+  "decision_reviewer": {
+    "provider": "openrouter",
+    "model": "typesafe/jev-1.13",
+    "protocol": "systemone"
+  }
 }

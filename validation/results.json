@@ -1,302 +1,1586 @@
 {
-  "development": {
+  "design": {
+    "cases": 24,
+    "gold_support_counts": {
+      "contradicted": 3,
+      "supported": 12,
+      "unknown": 9
+    },
+    "note": "Candidates, initial evidence maps and completion checks frozen; Jev decision calls were the only live inference.",
+    "pairs": 12,
+    "requested_jev_models": [
+      "typesafe/jev-1.13"
+    ],
+    "returned_jev_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "split_counts": {
+      "development": 8,
+      "holdout": 16
+    }
+  },
+  "diagnostic_rates": {
     "baseline": {
-      "eligible_supported_complete": 4,
-      "useful_emitted": 3,
-      "supported_complete_withheld": [
+      "abstention_rate": 0.5,
+      "answer_understatement_rate_vs_benchmark": 1.0,
+      "baseline_overstatement_rate_heuristic": 0.0,
+      "cases": 24,
+      "completion_withheld_count": 1,
+      "error_count": 0,
+      "factual_correctness": null,
+      "factual_correctness_reviewed": 0,
+      "mean_latency_seconds": 7.733333333333333e-05,
+      "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates.",
+      "overstatement_denominator": 12,
+      "overstatement_rate": 0.0,
+      "successful_cases": 24,
+      "task_completion_complete_rate": 0.5,
+      "task_completion_incomplete_count": 12,
+      "task_completion_reviewed": 24,
+      "task_completion_unknown_count": 0,
+      "understatement_denominator": 13,
+      "understatement_rate": 0.07692307692307693
+    },
+    "jev": {
+      "abstention_rate": 0.5416666666666666,
+      "answer_understatement_rate_vs_benchmark": 1.0,
+      "baseline_overstatement_rate_heuristic": 0.0,
+      "cases": 24,
+      "completion_withheld_count": 1,
+      "error_count": 0,
+      "factual_correctness": null,
+      "factual_correctness_reviewed": 0,
+      "mean_latency_seconds": 0.5155080833333333,
+      "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates.",
+      "overstatement_denominator": 11,
+      "overstatement_rate": 0.0,
+      "successful_cases": 24,
+      "task_completion_complete_rate": 0.4583333333333333,
+      "task_completion_incomplete_count": 13,
+      "task_completion_reviewed": 24,
+      "task_completion_unknown_count": 0,
+      "understatement_denominator": 12,
+      "understatement_rate": 0.08333333333333333
+    },
+    "note": "Existing summarize() diagnostics kept separate from gold-label metrics. Baseline latency is cached replay time, not end-to-end inference latency."
+  },
+  "freeze_validation": {
+    "frozen_files_verified": 35,
+    "manifest_path": "validation/freeze.json",
+    "manifest_sha256": "720624b607a36944c6bee4ed2b0d74fcb0025571472be51ca6f5862fd13c1b9d",
+    "method": "Check every original freeze.json hash against its ZIP member",
+    "note": "The ZIP contains original evaluation source, before later transport repairs.",
+    "snapshot_path": "validation/evaluation-source.zip",
+    "snapshot_sha256": "e9690a065b58b4661925bba7450334ed1a508220bd8a8ad39e3824aaf3a37b90",
+    "verified": true
+  },
+  "limitations": [
+    "One replay of 24 fixed cases across 12 pairs; eight development and 16 holdout cases.",
+    "Only p01b/p02b labels were human-confirmed; remaining gold labels were assistant-authored before inference.",
+    "A fixed replay isolates the added decision gate and does not measure newly generated answers or general factual accuracy.",
+    "Useful p02a remains withheld by a frozen completion judgment although both evidence arms classify it supported.",
+    "Recorded latency includes local verification overhead; cached baseline timing does not support an end-to-end speed comparison.",
+    "Three unknown cases remain wrongly labelled contradicted; audit passes measure policy compliance rather than semantics.",
+    "The live evaluation used the source archived in evaluation-source.zip, before later transport repairs."
+  ],
+  "metric_definitions": {
+    "audit_pass": "Renderer and policy consistency; does not establish semantic correctness",
+    "combined_label": "Final verification.status before the separate completion gate",
+    "emission": "At least one rewrite-plan entry with certainty other than abstain",
+    "raw_jev_label": "Contradicted if any span contradicted; supported if all spans supported; unknown otherwise",
+    "unsupported_emission": "Final emission where gold_support is unknown or contradicted",
+    "useful_retention": "Final emission among gold supported AND gold complete cases",
+    "wrong_contradiction": "Predicted contradicted where gold_support is supported or unknown"
+  },
+  "metrics": {
+    "baseline": {
+      "abstentions": {
+        "denominator": 24,
+        "numerator": 12,
+        "rate": 0.5
+      },
+      "audit_passes": {
+        "denominator": 24,
+        "numerator": 24,
+        "rate": 1.0
+      },
+      "combined_evidence_labels": {
+        "accuracy": {
+          "denominator": 24,
+          "numerator": 18,
+          "rate": 0.75
+        },
+        "confusion_gold_then_predicted": {
+          "contradicted": {
+            "contradicted": 3,
+            "supported": 0,
+            "unknown": 0
+          },
+          "supported": {
+            "contradicted": 0,
+            "supported": 12,
+            "unknown": 0
+          },
+          "unknown": {
+            "contradicted": 5,
+            "supported": 1,
+            "unknown": 3
+          }
+        },
+        "errors": [
+          {
+            "case_id": "p01b",
+            "gold": "unknown",
+            "predicted": "supported"
+          },
+          {
+            "case_id": "p04b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p06b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p07b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p10b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p11b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          }
+        ],
+        "wrong_contradictions": {
+          "case_ids": [
+            "p04b",
+            "p06b",
+            "p07b",
+            "p10b",
+            "p11b"
+          ],
+          "count": 5
+        }
+      },
+      "emissions": {
+        "denominator": 24,
+        "numerator": 12,
+        "rate": 0.5
+      },
+      "pipeline_errors": {
+        "case_ids": [],
+        "count": 0
+      },
+      "unsupported_emissions": {
+        "among_emissions": {
+          "denominator": 12,
+          "numerator": 1,
+          "rate": 0.08333333333333333
+        },
+        "among_unsupported_candidates": {
+          "denominator": 12,
+          "numerator": 1,
+          "rate": 0.08333333333333333
+        },
+        "case_ids": [
+          "p01b"
+        ],
+        "count": 1
+      },
+      "useful_retention": {
+        "case_ids": [
+          "p01a",
+          "p03a",
+          "p04a",
+          "p05a",
+          "p06a",
+          "p07a",
+          "p08a",
+          "p09a",
+          "p10a",
+          "p11a",
+          "p12a"
+        ],
+        "denominator": 12,
+        "numerator": 11,
+        "rate": 0.9166666666666666
+      },
+      "useful_withheld_case_ids": [
         "p02a"
-      ],
-      "unsupported_emitted": [
-        "p01b"
-      ],
-      "incomplete_emitted": [
-        "p01b"
-      ],
-      "unjustified_supported_verdicts": [
-        "p01b"
-      ],
-      "incorrect_contradictions": [
-        "p04b"
-      ],
-      "verdict_label_matches": 6,
-      "audit_pass_count": 8,
-      "metrics": {
-        "cases": 8,
-        "successful_cases": 8,
-        "error_count": 0,
-        "task_completion_reviewed": 8,
-        "task_completion_complete_rate": 0.5,
-        "task_completion_incomplete_count": 4,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 1,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 4,
-        "understatement_rate": 0.2,
-        "understatement_denominator": 5,
-        "answer_understatement_rate_vs_benchmark": 1.0,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.5,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 2.337500875,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+      ]
     },
-    "alignment": {
-      "eligible_supported_complete": 4,
-      "useful_emitted": 2,
-      "supported_complete_withheld": [
-        "p02a",
-        "p04a"
-      ],
-      "unsupported_emitted": [],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [],
-      "incorrect_contradictions": [
-        "p04b"
-      ],
-      "verdict_label_matches": 6,
-      "audit_pass_count": 7,
-      "metrics": {
-        "cases": 8,
-        "successful_cases": 7,
-        "error_count": 1,
-        "task_completion_reviewed": 7,
-        "task_completion_complete_rate": 0.2857142857142857,
-        "task_completion_incomplete_count": 5,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 1,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 2,
-        "understatement_rate": 0.3333333333333333,
-        "understatement_denominator": 3,
-        "answer_understatement_rate_vs_benchmark": 1.0,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.75,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 3.750129625,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+    "jev": {
+      "abstentions": {
+        "denominator": 24,
+        "numerator": 13,
+        "rate": 0.5416666666666666
+      },
+      "audit_passes": {
+        "denominator": 24,
+        "numerator": 24,
+        "rate": 1.0
+      },
+      "combined_evidence_labels": {
+        "accuracy": {
+          "denominator": 24,
+          "numerator": 21,
+          "rate": 0.875
+        },
+        "confusion_gold_then_predicted": {
+          "contradicted": {
+            "contradicted": 3,
+            "supported": 0,
+            "unknown": 0
+          },
+          "supported": {
+            "contradicted": 0,
+            "supported": 12,
+            "unknown": 0
+          },
+          "unknown": {
+            "contradicted": 3,
+            "supported": 0,
+            "unknown": 6
+          }
+        },
+        "errors": [
+          {
+            "case_id": "p04b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p06b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p10b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          }
+        ],
+        "wrong_contradictions": {
+          "case_ids": [
+            "p04b",
+            "p06b",
+            "p10b"
+          ],
+          "count": 3
+        }
+      },
+      "emissions": {
+        "denominator": 24,
+        "numerator": 11,
+        "rate": 0.4583333333333333
+      },
+      "pipeline_errors": {
+        "case_ids": [],
+        "count": 0
+      },
+      "raw_jev_labels": {
+        "accuracy": {
+          "denominator": 24,
+          "numerator": 21,
+          "rate": 0.875
+        },
+        "confusion_gold_then_predicted": {
+          "contradicted": {
+            "contradicted": 3,
+            "supported": 0,
+            "unknown": 0
+          },
+          "supported": {
+            "contradicted": 0,
+            "supported": 12,
+            "unknown": 0
+          },
+          "unknown": {
+            "contradicted": 3,
+            "supported": 0,
+            "unknown": 6
+          }
+        },
+        "errors": [
+          {
+            "case_id": "p04b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p06b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          },
+          {
+            "case_id": "p10b",
+            "gold": "unknown",
+            "predicted": "contradicted"
+          }
+        ],
+        "wrong_contradictions": {
+          "case_ids": [
+            "p04b",
+            "p06b",
+            "p10b"
+          ],
+          "count": 3
+        }
+      },
+      "recorded_latency": {
+        "count": 24,
+        "maximum_seconds": 1.144675,
+        "mean_seconds": 0.5152424166666667,
+        "minimum_seconds": 0.295868,
+        "note": "This is not isolated network time. Cached baseline timing cannot establish an end-to-end speed comparison.",
+        "p95_linear_interpolation_seconds": 0.9109634999999996,
+        "p95_method": "nearest rank: sorted[ceil(0.95 * n) - 1]",
+        "p95_seconds": 0.93846,
+        "scope": "Recorded Jev verification stage, including local mapping and validation overhead"
+      },
+      "unsupported_emissions": {
+        "among_emissions": {
+          "denominator": 11,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "among_unsupported_candidates": {
+          "denominator": 12,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "case_ids": [],
+        "count": 0
+      },
+      "useful_retention": {
+        "case_ids": [
+          "p01a",
+          "p03a",
+          "p04a",
+          "p05a",
+          "p06a",
+          "p07a",
+          "p08a",
+          "p09a",
+          "p10a",
+          "p11a",
+          "p12a"
+        ],
+        "denominator": 12,
+        "numerator": 11,
+        "rate": 0.9166666666666666
+      },
+      "useful_withheld_case_ids": [
+        "p02a"
+      ]
     }
   },
-  "holdout": {
+  "monotonicity_increase_counts": {
+    "certainty_ceiling": 0,
+    "evidence_strength": 0,
+    "rendered_certainty": 0,
+    "support_score": 0
+  },
+  "per_case": [
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 0.001024,
+        "recorded_verification_latency_seconds": 0.000946,
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "candidate": "The instrument reading is unavailable. An authorized current observation would establish it.",
+      "case_id": "p01a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.755312,
+        "recorded_verification_latency_seconds": 0.75515,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "The instrument reading is unavailable."
+          },
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "An authorized current observation would establish it."
+          }
+        ],
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "pair_id": "p01",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 8.4e-05,
+        "recorded_verification_latency_seconds": 3e-05,
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "candidate": "The unknown is the current observation. The needed information is an authorized current observation.",
+      "case_id": "p01b",
+      "gold_coverage": "incomplete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.375563,
+        "recorded_verification_latency_seconds": 0.375468,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "supported",
+            "raw_jev_status": "unknown",
+            "text": "The unknown is the current observation."
+          },
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "The needed information is an authorized current observation."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p01",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "incomplete",
+        "completion_withheld": true,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 5e-05,
+        "recorded_verification_latency_seconds": 1.9e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "On Thursdays the gallery opens at eleven.",
+      "case_id": "p02a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "incomplete",
+        "completion_withheld": true,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 1.145001,
+        "recorded_verification_latency_seconds": 1.144675,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "On Thursdays the gallery opens at eleven."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p02",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.3e-05,
+        "recorded_verification_latency_seconds": 1.6e-05,
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "candidate": "The gallery opens at eleven every day.",
+      "case_id": "p02b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.430046,
+        "recorded_verification_latency_seconds": 0.429935,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "unknown",
+            "raw_jev_status": "unknown",
+            "text": "The gallery opens at eleven every day."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p02",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 4.2e-05,
+        "recorded_verification_latency_seconds": 1.4e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "The valve is closed.",
+      "case_id": "p03a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.51159,
+        "recorded_verification_latency_seconds": 0.511396,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "The valve is closed."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p03",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3e-05,
+        "recorded_verification_latency_seconds": 1.4e-05,
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "candidate": "The sensor is closed.",
+      "case_id": "p03b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.71063,
+        "recorded_verification_latency_seconds": 0.710466,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "unknown",
+            "raw_jev_status": "unknown",
+            "text": "The sensor is closed."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p03",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 4.2e-05,
+        "recorded_verification_latency_seconds": 1.5e-05,
+        "support_score": 0.5,
+        "verification_status": "supported"
+      },
+      "candidate": "A restart is possible after the update.",
+      "case_id": "p04a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.938777,
+        "recorded_verification_latency_seconds": 0.93846,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "A restart is possible after the update."
+          }
+        ],
+        "support_score": 0.5,
+        "verification_status": "supported"
+      },
+      "pair_id": "p04",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.6e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "The device will certainly restart after the update.",
+      "case_id": "p04b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.566938,
+        "recorded_verification_latency_seconds": 0.564607,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "The device will certainly restart after the update."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p04",
+      "split": "development"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.9e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "Approval has not been granted for the release.",
+      "case_id": "p05a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.394748,
+        "recorded_verification_latency_seconds": 0.394576,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Approval has not been granted for the release."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p05",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.5e-05,
+        "recorded_verification_latency_seconds": 1.1e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "The release is approved.",
+      "case_id": "p05b",
+      "gold_coverage": "complete",
+      "gold_support": "contradicted",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.648571,
+        "recorded_verification_latency_seconds": 0.648459,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "The release is approved."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p05",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.7e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "Badge approval is necessary for the door to open.",
+      "case_id": "p06a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.488185,
+        "recorded_verification_latency_seconds": 0.488005,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Badge approval is necessary for the door to open."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p06",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.7e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "Badge approval guarantees that the door opens.",
+      "case_id": "p06b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.439376,
+        "recorded_verification_latency_seconds": 0.439269,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "Badge approval guarantees that the door opens."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p06",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.7e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "candidate": "Three units in the batch underwent testing.",
+      "case_id": "p07a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.447663,
+        "recorded_verification_latency_seconds": 0.447456,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Three units in the batch underwent testing."
+          }
+        ],
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "pair_id": "p07",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.6e-05,
+        "recorded_verification_latency_seconds": 1.2e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "Every unit in the batch underwent testing.",
+      "case_id": "p07b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.407696,
+        "recorded_verification_latency_seconds": 0.407579,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "contradicted",
+            "raw_jev_status": "unknown",
+            "text": "Every unit in the batch underwent testing."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p07",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.7e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "Under condition A the boiling point is 80 degrees.",
+      "case_id": "p08a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.320119,
+        "recorded_verification_latency_seconds": 0.319908,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Under condition A the boiling point is 80 degrees."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p08",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.6e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "candidate": "Under every condition the boiling point is 80 degrees.",
+      "case_id": "p08b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.435105,
+        "recorded_verification_latency_seconds": 0.434981,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "unknown",
+            "raw_jev_status": "unknown",
+            "text": "Under every condition the boiling point is 80 degrees."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p08",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.7e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "There are exactly 12 millilitres of liquid in the vial.",
+      "case_id": "p09a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.434343,
+        "recorded_verification_latency_seconds": 0.434171,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "There are exactly 12 millilitres of liquid in the vial."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p09",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.5e-05,
+        "recorded_verification_latency_seconds": 1.2e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "There are exactly 13 millilitres of liquid in the vial.",
+      "case_id": "p09b",
+      "gold_coverage": "complete",
+      "gold_support": "contradicted",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.552733,
+        "recorded_verification_latency_seconds": 0.552622,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "There are exactly 13 millilitres of liquid in the vial."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p09",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.6e-05,
+        "recorded_verification_latency_seconds": 1.2e-05,
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "candidate": "Review is required before deciding the application.",
+      "case_id": "p10a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.5119,
+        "recorded_verification_latency_seconds": 0.511602,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Review is required before deciding the application."
+          }
+        ],
+        "support_score": 1.0,
+        "verification_status": "supported"
+      },
+      "pair_id": "p10",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.5e-05,
+        "recorded_verification_latency_seconds": 1.2e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "Review guarantees approval of the application.",
+      "case_id": "p10b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.428688,
+        "recorded_verification_latency_seconds": 0.428575,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "Review guarantees approval of the application."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p10",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.9e-05,
+        "recorded_verification_latency_seconds": 1.3e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "An authorized operator observation would establish current access status.",
+      "case_id": "p11a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.348078,
+        "recorded_verification_latency_seconds": 0.347803,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "An authorized operator observation would establish current access status."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p11",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 3.1e-05,
+        "recorded_verification_latency_seconds": 1.6e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "An authorized operator observation requires supplying a serial number and manufacturer code.",
+      "case_id": "p11b",
+      "gold_coverage": "complete",
+      "gold_support": "unknown",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "unknown",
+        "recorded_case_latency_seconds": 0.44817,
+        "recorded_verification_latency_seconds": 0.448059,
+        "span_labels": [
+          {
+            "combined_status": "unknown",
+            "initial_status": "contradicted",
+            "raw_jev_status": "unknown",
+            "text": "An authorized operator observation requires supplying a serial number and manufacturer code."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "unknown"
+      },
+      "pair_id": "p11",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 4.9e-05,
+        "recorded_verification_latency_seconds": 1.9e-05,
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "candidate": "Exercise and sleep are associated in the survey; correlation does not establish causation.",
+      "case_id": "p12a",
+      "gold_coverage": "complete",
+      "gold_support": "supported",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "tentative",
+        "completion_status": "complete",
+        "completion_withheld": false,
+        "emitted": true,
+        "emitted_certainty_levels": [
+          "tentative"
+        ],
+        "evidence_strength": "weak",
+        "pipeline_status": "ok",
+        "raw_jev_status": "supported",
+        "recorded_case_latency_seconds": 0.337008,
+        "recorded_verification_latency_seconds": 0.336728,
+        "span_labels": [
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "Exercise and sleep are associated in the survey;"
+          },
+          {
+            "combined_status": "supported",
+            "initial_status": "supported",
+            "raw_jev_status": "supported",
+            "text": "correlation does not establish causation."
+          }
+        ],
+        "support_score": 1,
+        "verification_status": "supported"
+      },
+      "pair_id": "p12",
+      "split": "holdout"
+    },
+    {
+      "baseline": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "recorded_case_latency_seconds": 2.9e-05,
+        "recorded_verification_latency_seconds": 1.4e-05,
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "candidate": "The survey establishes that exercise causes better sleep.",
+      "case_id": "p12b",
+      "gold_coverage": "incomplete",
+      "gold_support": "contradicted",
+      "jev": {
+        "audit_passed": true,
+        "certainty_ceiling": "abstain",
+        "completion_status": "incomplete",
+        "completion_withheld": false,
+        "emitted": false,
+        "emitted_certainty_levels": [],
+        "evidence_strength": "none",
+        "pipeline_status": "ok",
+        "raw_jev_status": "contradicted",
+        "recorded_case_latency_seconds": 0.295954,
+        "recorded_verification_latency_seconds": 0.295868,
+        "span_labels": [
+          {
+            "combined_status": "contradicted",
+            "initial_status": "contradicted",
+            "raw_jev_status": "contradicted",
+            "text": "The survey establishes that exercise causes better sleep."
+          }
+        ],
+        "support_score": 0.0,
+        "verification_status": "contradicted"
+      },
+      "pair_id": "p12",
+      "split": "holdout"
+    }
+  ],
+  "schema_version": 1,
+  "source_inputs": {
+    "fixtures": {
+      "path": "benchmarks/evidence-pairs.jsonl",
+      "sha256": "884387ae101b72ee4308d0d8be50e03821360f2ea843a329ee767aad7f61648b"
+    },
+    "frozen_replay": {
+      "path": "validation/frozen-replay.jsonl",
+      "sha256": "89139f073e13b1bc56339cd0dbd7b1a370d03f9e9763e8d61331ba3cca68bed9"
+    }
+  },
+  "source_logs": {
     "baseline": {
-      "eligible_supported_complete": 8,
-      "useful_emitted": 8,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [],
-      "incorrect_contradictions": [
-        "p06b",
-        "p07b",
-        "p10b",
-        "p11b"
-      ],
-      "verdict_label_matches": 12,
-      "audit_pass_count": 16,
-      "metrics": {
-        "cases": 16,
-        "successful_cases": 16,
-        "error_count": 0,
-        "task_completion_reviewed": 16,
-        "task_completion_complete_rate": 0.5,
-        "task_completion_incomplete_count": 8,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 8,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 8,
-        "answer_understatement_rate_vs_benchmark": 1.0,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.5,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 2.21836725,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+      "case_records": 24,
+      "path": "runs/replay-baseline.jsonl",
+      "run_id": "9083b815-59c1-4d8b-8ceb-82bd772c2471",
+      "sha256": "28790b17ba0623c8794e7900cef39a0a5d643f78f1ed699e08c3fe467fe3166e"
     },
-    "alignment": {
-      "eligible_supported_complete": 8,
-      "useful_emitted": 8,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [],
-      "incorrect_contradictions": [
-        "p06b",
-        "p07b",
-        "p08b",
-        "p10b"
-      ],
-      "verdict_label_matches": 12,
-      "audit_pass_count": 16,
-      "metrics": {
-        "cases": 16,
-        "successful_cases": 16,
-        "error_count": 0,
-        "task_completion_reviewed": 16,
-        "task_completion_complete_rate": 0.5,
-        "task_completion_incomplete_count": 8,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 8,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 8,
-        "answer_understatement_rate_vs_benchmark": 1.0,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.5,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 3.9480961875,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+    "jev": {
+      "case_records": 24,
+      "path": "runs/replay-jev.jsonl",
+      "run_id": "e99275de-1049-4e75-8324-05b9f49d18b6",
+      "sha256": "ac87fb3fd908a70cf92ce91564fa6705d881064d59fdc70f1aed7e8e157e91d8"
     }
   },
-  "arithmetic": {
-    "baseline": {
-      "eligible_supported_complete": 4,
-      "useful_emitted": 4,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [],
-      "incorrect_contradictions": [],
-      "verdict_label_matches": 4,
-      "audit_pass_count": 4,
-      "metrics": {
-        "cases": 4,
-        "successful_cases": 4,
-        "error_count": 0,
-        "task_completion_reviewed": 4,
-        "task_completion_complete_rate": 1.0,
-        "task_completion_incomplete_count": 0,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 4,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 4,
-        "answer_understatement_rate_vs_benchmark": 0.5,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.0,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 1.57371025,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+  "usage": {
+    "path": "validation/usage.json",
+    "recomputed_from_responses": {
+      "input_tokens": 13100,
+      "output_tokens": 1143,
+      "reported_cost_usd": 0.0005502,
+      "requests": 24
     },
-    "alignment": {
-      "eligible_supported_complete": 4,
-      "useful_emitted": 4,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [],
-      "incorrect_contradictions": [],
-      "verdict_label_matches": 4,
-      "audit_pass_count": 4,
-      "metrics": {
-        "cases": 4,
-        "successful_cases": 4,
-        "error_count": 0,
-        "task_completion_reviewed": 4,
-        "task_completion_complete_rate": 1.0,
-        "task_completion_incomplete_count": 0,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 4,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 4,
-        "answer_understatement_rate_vs_benchmark": 0.5,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.0,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 1.4924620000000002,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
-    }
-  },
-  "fresh": {
-    "baseline": {
-      "eligible_supported_complete": 5,
-      "useful_emitted": 5,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [
-        "p06a"
-      ],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [
-        "p06a"
-      ],
-      "incorrect_contradictions": [],
-      "verdict_label_matches": 5,
-      "audit_pass_count": 6,
-      "metrics": {
-        "cases": 6,
-        "successful_cases": 6,
-        "error_count": 0,
-        "task_completion_reviewed": 6,
-        "task_completion_complete_rate": 1.0,
-        "task_completion_incomplete_count": 0,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 6,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 6,
-        "answer_understatement_rate_vs_benchmark": 0.8333333333333334,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.0,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 2.738881666666667,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
+    "recorded": {
+      "input_tokens": 13100,
+      "limits": {
+        "input_tokens": 40000,
+        "reported_cost_usd": 0.02,
+        "requests": 24
+      },
+      "note": "Limits stop subsequent calls once reached; the current in-flight request may cross token/cost limits. No retries or new chat calls.",
+      "reported_cost_usd": 0.0005501999999999999,
+      "requests": 24,
+      "unknown_usage": false
     },
-    "alignment": {
-      "eligible_supported_complete": 5,
-      "useful_emitted": 5,
-      "supported_complete_withheld": [],
-      "unsupported_emitted": [
-        "p06a"
-      ],
-      "incomplete_emitted": [],
-      "unjustified_supported_verdicts": [
-        "p06a"
-      ],
-      "incorrect_contradictions": [],
-      "verdict_label_matches": 5,
-      "audit_pass_count": 6,
-      "metrics": {
-        "cases": 6,
-        "successful_cases": 6,
-        "error_count": 0,
-        "task_completion_reviewed": 6,
-        "task_completion_complete_rate": 1.0,
-        "task_completion_incomplete_count": 0,
-        "task_completion_unknown_count": 0,
-        "completion_withheld_count": 0,
-        "overstatement_rate": 0.0,
-        "overstatement_denominator": 6,
-        "understatement_rate": 0.0,
-        "understatement_denominator": 6,
-        "answer_understatement_rate_vs_benchmark": 0.8333333333333334,
-        "baseline_overstatement_rate_heuristic": 0.0,
-        "abstention_rate": 0.0,
-        "factual_correctness": null,
-        "factual_correctness_reviewed": 0,
-        "mean_latency_seconds": 7.1269393333333335,
-        "metric_note": "Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates."
-      }
-    }
-  },
-  "heldout_adoption_conditions_met": true,
-  "promotion_decision": "Experimental: heldout emission conditions alone are insufficient; development has a mapping failure and retention loss, with residual incorrect contradiction and an ambiguous fresh inference.",
-  "provenance": "Two boundary labels confirmed by user; other fixture labels assistant-authored before inference. Fresh review after inference is separate. Same-model double review is correlated; small heldout set is not an independent research benchmark."
+    "recorded_totals_match": true,
+    "sha256": "1c0b6aa353e39f7e73f71a9df00a65bfe4e94c5898cdbff3c37c72d9bd0fe161"
+  }
 }

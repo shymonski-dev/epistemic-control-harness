@@ -1,6 +1,0 @@
-{
-  "timing": "Before arithmetic and fresh inference; evidence-pair inference already running.",
-  "expression_and_result": "complete",
-  "intermediate_steps": "optional",
-  "reason": "User explicitly removed intermediate-step requirement."
-}

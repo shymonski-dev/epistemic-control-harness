@@ -1,19 +1,24 @@
 {
   "tests": {
-    "passed": true,
-    "returncode": 0
+    "exit_code": 0,
+    "output": "----------------------------------------------------------------------\nRan 107 tests in 0.017s\n\nOK"
   },
   "offline_cli": {
-    "passed": true,
-    "returncode": 0
+    "exit_code": 0,
+    "output": "q01: ok | Proposition supported by the supplied benchmark evidence: \"391\"\nq02: ok | Proposition supported by the supplied benchmark evidence: \"Paris\"\nq03: ok | Proposition supported by the supplied benchmark evidence: \"Au\"\nq04: ok | Proposition supported by the supplied benchmark evidence: \"Ada is a bird\"\nq05: ok | Proposition supported by the supplied benchmark evidence: \"3\"\nq06: ok | Proposition supported by the supplied benchmark evidence: \"1969\"\nq07: ok | Proposition supported by the supplied benchmark evidence: \"100\"\nq08: ok | I cannot establish an answer from the available evidence.\nq09: ok | I cannot establish an answer from the available evidence.\nq10: ok | Qualified proposition, with limited supporting evidence: \"The ruler does not justify that precision\"\nq11: ok | Qualified proposition, with limited supporting evidence: \"Correlation alone does not establish causation\"\nq12: ok | I cannot establish an answer from the available evidence.\nq13: ok | Qualified proposition, with limited supporting evidence: \"Three testers are insufficient to establish universal customer preference\"\nq14: ok | Qualified proposition, with limited supporting evidence: \"It can raise KeyError if the key is absent\"\nq15: ok | Tentative, unverified proposition (not established as fact): \"The library may open at 9, but this is unverified\"\nq16: ok | Tentative, unverified proposition (not established as fact): \"A background task may explain the loud fan, but other causes are possible\"\nq17: ok | I cannot establish an answer from the available evidence.\nq18: ok | I cannot establish an answer from the available evidence.\nq19: ok | I cannot establish an answer from the available evidence.\nq20: ok | I cannot establish an answer from the available evidence.\n{\n  \"cases\": 20,\n  \"successful_cases\": 20,\n  \"error_count\": 0,\n  \"task_completion_reviewed\": 0,\n  \"task_completion_complete_rate\": null,\n  \"task_completion_incomplete_count\": 0,\n  \"task_completion_unknown_count\": 0,\n  \"completion_withheld_count\": 0,\n  \"overstatement_rate\": 0.0,\n  \"overstatement_denominator\": 13,\n  \"understatement_rate\": 0.0,\n  \"understatement_denominator\": 13,\n  \"answer_understatement_rate_vs_benchmark\": 0.15,\n  \"baseline_overstatement_rate_heuristic\": 0.45,\n  \"abstention_rate\": 0.35,\n  \"factual_correctness\": null,\n  \"factual_correctness_reviewed\": 0,\n  \"mean_latency_seconds\": 2.125e-05,\n  \"metric_note\": \"Controlled rates use structured claim ceilings; baseline uses a crude wording heuristic. Null means no denominator/review. Errors are abstentions but excluded from certainty rates.\"\n}"
   },
-  "results_reproduction": {
-    "passed": true,
-    "returncode": 0
+  "results": {
+    "exit_code": 0,
+    "output": "Recomputed validation/results.json from recorded logs; no network calls."
+  },
+  "recorded_replay": {
+    "exit_code": 0,
+    "output": "{\"pipeline_records_reproduced\": 48, \"recorded_jev_responses\": 24, \"network_calls\": 0, \"decisions_unchanged_after_repairs\": true}"
   },
   "credential_exclusion": true,
   "prior_frozen_files_unchanged": true,
-  "recorded_results_reproduced": true,
-  "tests_count": 87,
-  "offline_cases": 20
+  "tests_count": 107,
+  "offline_cases": 20,
+  "recorded_pipeline_records_reproduced": 48,
+  "network_calls": 0
 }

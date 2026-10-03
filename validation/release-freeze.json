@@ -1,11 +1,6 @@
 {
-  "purpose": "GitHub handover file hashes; excludes this manifest and package-check.json. Frozen inference and repaired runtime manifests are separate.",
+  "purpose": "Release after numeric/redirect repairs. Live assessment snapshot is evaluation-source.zip and freeze.json; no assessment tuning.",
   "sha256": {
-    ".env.example": "6c470bcc17e6866d15ea1548b96f358e4b81a189dfee77e4f172a3a3883553c1",
-    ".gitignore": "f5ef5e60188421987d16589a8ff9028db11a62fc1eb46f05e09eb9a9d620a890",
-    "PLAN.md": "6b8c80d963fb2db567931716ba2b48bf4bf4c3f3e7c336b21f98da086e724cc3",
-    "README.md": "2b166ff340e03896b9ef27145946cb69809b7bacfd3ab72c1f2f1ac5f4c680e1",
-    "VALIDATION.md": "221e6747cb7899d22512bbdc5c6d0c3aa9761a99854d203e6ce4d8049d76e0be",
     "benchmarks/evidence-pairs.jsonl": "884387ae101b72ee4308d0d8be50e03821360f2ea843a329ee767aad7f61648b",
     "benchmarks/replay-cases.jsonl": "12fd3b03a78859964c8d72ba31640936ba419e4f900855c8db4ea3bc0403a328",
     "benchmarks/starter.jsonl": "9cd299ec8628e64c24530b7afedd764050e9e078a41369dccfea2ac1d48634d4",
@@ -30,9 +25,6 @@
     "epistemic_harness/policy.py": "6e5ebd27d584fccf99add5653b32dddd4d65116114864c80689ccbf77d6c2abb",
     "epistemic_harness/routing.py": "15dfcbe745f8a37ef2161f7f2d766af2d8ccff9543d351abf06617e38ea76921",
     "epistemic_harness/verification.py": "9a4e07afe90cc0063ba6647b1609789b86b9a90283d1d64dabd9e99607ed5414",
-    "pyproject.toml": "3df3cca063b4a1c9c67b1ee44909561225805aa5500f30c28c03533ded555023",
-    "runs/replay-baseline.jsonl": "28790b17ba0623c8794e7900cef39a0a5d643f78f1ed699e08c3fe467fe3166e",
-    "runs/replay-jev.jsonl": "ac87fb3fd908a70cf92ce91564fa6705d881064d59fdc70f1aed7e8e157e91d8",
     "tests/test_alignment.py": "6a59e4af00523537a809f71fc1601e25aba54286da43c1782f6f7b273d9140a5",
     "tests/test_bridge.py": "df6e1e2707fe0a1b7375512b41fc562757fb92148c4fda962fef284bf768b60d",
     "tests/test_completion.py": "6fcfcead0e1e4b9993643f2eb2d67d8697e32b3c6d77b0fc695115e1e690070a",
@@ -44,13 +36,8 @@
     "tests/test_requirements.py": "ddbfa950e199d734cf2505743a34e0d09fb89e8338390a0a35ba16222ae52961",
     "tests/test_routing.py": "c9c38d29bbc131e12e13c6d371b2072c605a0599cde3f4ee2cf83be38b77c44f",
     "validation/check_recorded_replay.py": "67e86e133c80cda34cf627f0c9342c6b77fa32cb6a39fdc845237d44c9272bed",
-    "validation/evaluation-source.zip": "e9690a065b58b4661925bba7450334ed1a508220bd8a8ad39e3824aaf3a37b90",
-    "validation/freeze.json": "720624b607a36944c6bee4ed2b0d74fcb0025571472be51ca6f5862fd13c1b9d",
     "validation/frozen-replay.jsonl": "89139f073e13b1bc56339cd0dbd7b1a370d03f9e9763e8d61331ba3cca68bed9",
-    "validation/release-freeze.json": "f399d6ad62efff21eb92e1de9499e0a4c354307ff9763328e568a12f20a7b851",
-    "validation/results.json": "0d0b501b2a1bb87e2a7fc1b811e558685e2cc9387831d08c257cf6abb0713afb",
     "validation/run_replay.py": "1cb887595fe292ebfb0142006cd227f2b4432ea1d688694bf90b1e5f7c838950",
-    "validation/summarize_validation.py": "d6b83e9cd669ff7436aa7821213b2aff48f993c50f02327702e0ed050565bb0f",
-    "validation/usage.json": "1c0b6aa353e39f7e73f71a9df00a65bfe4e94c5898cdbff3c37c72d9bd0fe161"
+    "validation/summarize_validation.py": "d6b83e9cd669ff7436aa7821213b2aff48f993c50f02327702e0ed050565bb0f"
   }
 }
